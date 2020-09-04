@@ -10,12 +10,19 @@ main {
     /*nombrado de las lineas*/
     grid-template-columns:
         [lateral-start] 1fr
-        [contenido-start] 2fr;
+        /*la misma línea es el final del lateral y el inicio contenido*/
+        [lateral-end contenido-start] 2fr
+
+        /*declaración última línea del grid*/
+        [contenido-end];
+    /*no tienen unidad detrás al ser la última*/
 
      grid-template-rows: 
+     /*igual en las filas*/
         [header-start] 1fr
-        [contenido-start] 3fr
-        [footer-start] 1fr;  
+        [header-end contenido-start] 3fr
+        [contenido-end footer-start] 1fr
+        [footer-end];  
 
     
 }
@@ -36,13 +43,13 @@ main {
  /*posicionamiento*/
  
  header {
-     grid-column: lateral-start / span 2;
+     grid-column: lateral-start / contenido-end;
  }
  footer {
-     grid-column: contenido-start / -1;
+     grid-column: contenido-start / contenido-end;
  }
  aside {
-     grid-row: contenido-start / span 2 ;
+     grid-row: contenido-start / footer-end ;
  }
  /*queries*/
  @media all and (max-width: 750px) {
@@ -50,39 +57,41 @@ main {
     main {
         grid-template-columns: 
             [contenido-start] 2fr
-            [lateral-start] 1fr;
+            [contenido-end lateral-start] 1fr
+            [lateral-end];
     }
     header {
-        grid-column: contenido-start / -1;
+        grid-column: contenido-start / lateral-end;
     }
     aside {
-        grid-row: contenido-start /footer-start;
-        grid-column: lateral-start;
+        grid-row: contenido-start / footer-start;
+        grid-column: lateral-start / lateral-end;
     }
     article {
         grid-column: contenido-start;
     }
     footer {
-        grid-column: contenido-start / -1;
+        grid-column: contenido-start / lateral-end;
     }
  }
 
- @media all and (max-width:650px) {
+ @media all and (max-width:600px) {
     main {
     grid-template-rows: 
     [header-start] 1fr
-    [contenido-start] 3fr
-    [sidebar-start] 1fr
-    [footer-start] 1fr;  
+    [header-end contenido-start] 3fr
+    [contenido-end sidebar-start] 1fr
+    [sidebar-end footer-start] 1fr
+    [footer-end];  
     }
      article{
-         grid-column: contenido-start / -1;
-         grid-row: contenido-start;
+         grid-column: contenido-start /lateral-end;
+         grid-row: contenido-start / contenido-end;
      }
 
      aside {
-         grid-column: contenido-start / -1;
-         grid-row: sidebar-start;
+         grid-column: contenido-start /lateral-end;
+         grid-row: sidebar-start / sidebar-end;
      }
  }
  @media (max-width: 500px){
