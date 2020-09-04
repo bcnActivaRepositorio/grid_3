@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;531;700;900&display=swap');
+* {
+    box-sizing: border-box;
+}
+main {
+    display: grid;
+    height: 100vh;
+    gap: 10px;
+
+    /*nombrado de las lineas*/
+    grid-template-columns:
+        [lateral-start] 1fr
+        [contenido-start] 2fr;
+
+     grid-template-rows: 
+        [header-start] 1fr
+        [contenido-start] 3fr
+        [footer-start] 1fr;  
+
+    
+}
+ /*Para todo lo demás, mastercard*/
+
+ main > * {
+     font-family: 'Raleway', Verdana, Geneva, Tahoma, sans-serif;
+     background-color: #222831;
+     color: #00adb5;
+     font-size: 175%;
+     font-weight: 900;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+
+ }
+
+ /*posicionamiento*/
+ 
+ header {
+     grid-column: lateral-start / span 2;
+ }
+ footer {
+     grid-column: contenido-start / -1;
+ }
+ aside {
+     grid-row: contenido-start / span 2 ;
+ }
+ /*queries*/
+ @media all and (max-width: 750px) {
+
+    main {
+        grid-template-columns: 
+            [contenido-start] 2fr
+            [lateral-start] 1fr;
+    }
+    header {
+        grid-column: contenido-start / -1;
+    }
+    aside {
+        grid-row: contenido-start /footer-start;
+        grid-column: lateral-start;
+    }
+    article {
+        grid-column: contenido-start;
+    }
+    footer {
+        grid-column: contenido-start / -1;
+    }
+ }
+
+ @media all and (max-width:650px) {
+    main {
+    grid-template-rows: 
+    [header-start] 1fr
+    [contenido-start] 3fr
+    [sidebar-start] 1fr
+    [footer-start] 1fr;  
+    }
+     article{
+         grid-column: contenido-start / -1;
+         grid-row: contenido-start;
+     }
+
+     aside {
+         grid-column: contenido-start / -1;
+         grid-row: sidebar-start;
+     }
+ }
+ @media (max-width: 500px){
+     main > * {
+         font-size: 125%;
+         font-weight: 700;
+     }
+ }
